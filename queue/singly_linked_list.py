@@ -4,24 +4,36 @@ class Node:
     self.value = value
     # reference to the next node in the list
     self.next_node = next_node
-​
+
   def get_value(self):
     return self.value
-​
+
   def get_next(self):
     return self.next_node
-​
+
   def set_next(self, new_next):
     # set this node's next_node reference to the passed in node
     self.next_node = new_next
-​
+
 class LinkedList:
   def __init__(self):
     # reference to the head of the list
     self.head = None
     # reference to the tail of the list
     self.tail = None
-​
+
+  def set_head_tail(self, head_val, tail_val):  # O(1)
+        self.head = head_val
+        self.tail = tail_val
+
+  def add_to_head(self, value):  # O(1)
+        new_node = Node(value)
+        if self.head:
+            new_node.set_next(self.head)
+            self.head = new_node
+        else:
+            self.set_head_tail(new_node, new_node)
+
   def add_to_tail(self, value):
     # wrap the input value in a node
     new_node = Node(value, None)
@@ -36,7 +48,7 @@ class LinkedList:
       self.tail.set_next(new_node)
       # set the list's tail reference to the new node
       self.tail = new_node
-​
+
   def remove_head(self):
     # return None if there is no head (i.e. the list is empty)
     if not self.head:
@@ -56,7 +68,7 @@ class LinkedList:
     # set the head reference to the current head's next node in the list
     self.head = self.head.get_next()
     return value
-​
+
   def contains(self, value):
     if not self.head:
       return False
